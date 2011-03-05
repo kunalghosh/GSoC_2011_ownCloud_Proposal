@@ -1,4 +1,4 @@
-the ownCloud ODT file is the raw file. 
-the ownCloud_ProposalPDF.pdf is pdf export of the above.
+ownCloud_Proposal is original ODT file. 
+ownCloud_ProposalPDF.pdf is pdf export of the above.
 
 This repository contains all the files related to my ownCloud GSOC proposal.
