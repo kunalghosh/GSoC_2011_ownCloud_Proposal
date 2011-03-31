@@ -32,7 +32,7 @@ Part 2: Identify which files need to be synced. (Working)
 
 Part 3: The Transport mechanism:
     
-    Option 1:Since most hosting providers provide FTP access , the sync client could use that (Even though ownCloud itself doesn't bundle an FTP server).
+    <span style="text-decoration: line-through;">Option 1:Since most hosting providers provide FTP access , the sync client could use that (Even though ownCloud itself doesn't bundle an FTP server).</span>
     Option 2:WebDAV client API , there are a lot of python WebDAV client APIs which can be used. But most have poor documentation.
     Option 3:Mount the OwnCloud WebDAV Remote file-system in a hidden folder in the local file system and the transfer data. The problem with that is, Windows 7 (most widely deployed ) seems to have a broken implementation of WebDAV. But this is not a problem in case of Linux / MacOS.
         
