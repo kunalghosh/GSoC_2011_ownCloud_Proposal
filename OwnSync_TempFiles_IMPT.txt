@@ -1,0 +1,8 @@
+ Every file that needs to be synced is added to a local version control.
+    When the first upload is done, the client uploads the whole file-system under version control (including the .git or .hg folders) to the server.
+    Subsequently when the client initiates a sync, the list of all files that have changed since the last sync (git status, modified and new files)
+    I propose mercurial for this task (Though i propose mercurial , git is also a likely candidate).
+    Reasons for choosing mercurial:
+    1. Its written in pure python and is very portable.
+    2. It allows diffs in extended git format so we are free to use git backends like glip (www.fimml.at/#glip)
+
