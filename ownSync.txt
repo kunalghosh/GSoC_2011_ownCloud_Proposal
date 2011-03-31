@@ -1,0 +1,48 @@
+Motivation for Proposal / Goal:
+OwnCloud is a very promising project that enables users to host their own personal cloud. However, at times there is a need for the files hosted on the cloud to be available locally. But, mere copying the files from the server and using it offline brings in the problem of having multiple copies of the same file (one online and one offline). In such a situation the user needs an application that can keep the local copy of files and the one on the cloud in sync. At the same time the application must be:
+1.Easy to use.
+2.Portable.
+3.Fast 
+This is what my proposed Sync-Client aims to achieve.
+
+Implementation Details:
+My design of the  OwnCloud Sync Client is in 3 parts:
+( Design Documentation: https://github.com/kunalghosh/GSoC_2011_ownCloud_Proposal/blob/master/ownCloud_ProposalPDF.pdf )
+
+Part 1: The User Interface 
+I propose to implement the user-interface in PyQt / PySide. The UI mock-ups can be found on pages 3,4,5 in the PDF above.(Please ignore the context of the mock-ups refer to in the PDF).All the settings that the user makes in the UI is saved in a configuration file which is then used by the backend. This makes the UI modular (if in the future some one wants to implement a better looking user interface they can very well do so).
+
+The backend of the application is divided into two parts:
+Part 2: Identify which files need to be synced. (Working)
+    (The sync client doesn't provide versioning , it merely makes sure that every sync client has the most recent version of all the files)
+    
+    2.1 When the sync needs to be initiated all clients upload a text file, containing the filenames and their last modification times, to the server. Each of these files have a unique name (hash.txt ?)
+
+    2.2 The server then generates a MASTER_FILE which contains the "most recent last modification time" , filename and client (which has the most recent copy of the file). (There is a problem here : What if two clients have a file with the same last modification time but the files contain differnt data ?)
+    
+    2.3 The server then generates individual files called CLIENT_UPLOAD_FILES one for each client. Containing only those file names which the client has the most recent copy  of(among all clients). The clients must upload only these files to the server.
+
+    2.4 The server then creates a ".lock-clientID" file for each client that must upload files.
+
+    2.5 Once a client finishes uploading all the files it deletes its .lock file.Each client waits till all lock files are deleted. 
+    
+    2.6 The server then generates a ".lock-download" file for each client that uploaded the text file in step 1. No upload happens till all download lock files are deleted. The Clients then download the MASTER_FILE and download only those files from the server which are present in MASTER_FILE but not in their CLIENT_UPLOAD_FILES.
+
+    2.7 Now all clients have a synced copy of files.
+
+Part 3: The Transport mechanism:
+    
+    Option 1:Since most hosting providers provide FTP access , the sync client could use that (Even though ownCloud itself doesn't bundle an FTP server).
+    Option 2:WebDAV client API , there are a lot of python WebDAV client APIs which can be used. But most have poor documentation.
+    Option 3:Mount the OwnCloud WebDAV Remote file-system in a hidden folder in the local file system and the transfer data. The problem with that is, Windows 7 (most widely deployed ) seems to have a broken implementation of WebDAV. But this is not a problem in case of Linux / MacOS.
+        
+   
+Tentative Timeline (in weekly intervals until 2 weeks after the end of GSoC):
+
+
+
+Do you have other obligations from late May to early August (school, work, vacation, etc.)? Please note that we expect the Summer of Code to be a full-time, 40-hr a week occupation. It is important to be clear and upfront about other commitments that you may have during that time.
+
+About Me (let us know who you are!):
+
+ 
