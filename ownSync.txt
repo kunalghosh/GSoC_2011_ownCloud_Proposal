@@ -38,7 +38,28 @@ Part 3: The Transport mechanism:
         
    
 Tentative Timeline (in weekly intervals until 2 weeks after the end of GSoC):
-
+April 25 - May 2   :    
+May 3    - May 9   :
+May 10   - May 16  :
+May 16   - May 25  :
+May 26   - June 1  :
+June 2   - June 8  :
+June 9   - June 15 :
+June 16  - June 22 :
+June 23  - June 29 :
+June 30  - July 6  :
+July 7   - July 13 :
+- - - - - - - - - - - > Midterm
+July 14  - July 20 :
+July 21  - July 27 :
+July 28  - Aug 3   :
+Aug 4    - Aug 10  :
+Aug 11   - Aug 17  :
+- - - - - - - - - - - > Suggested Pencils Down
+Aug 18   - Aug 22  :
+- - - - - - - - - - - > Firm Pencils Down
+Aug 23   - Aug 29  :
+Aug 30   - Sep 5   :
 
 
 Do you have other obligations from late May to early August (school, work, vacation, etc.)? Please note that we expect the Summer of Code to be a full-time, 40-hr a week occupation. It is important to be clear and upfront about other commitments that you may have during that time.
