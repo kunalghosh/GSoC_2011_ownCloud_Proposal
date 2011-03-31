@@ -38,32 +38,36 @@ Part 3: The Transport mechanism:
         
    
 Tentative Timeline (in weekly intervals until 2 weeks after the end of GSoC):
-April 25 - May 2   :    
-May 3    - May 9   :
-May 10   - May 16  :
-May 16   - May 25  :
-May 26   - June 1  :
-June 2   - June 8  :
-June 9   - June 15 :
-June 16  - June 22 :
-June 23  - June 29 :
-June 30  - July 6  :
-July 7   - July 13 :
+April 25 - May 2   : Familiarize myself with members of ownCloud team and which part each works on. 
+May 3    - May 9   : Collect Feedback from team-members and refine implementation details.
+May 10   - May 16  : Finalize on a Project WorkPlan (There must not be any ambiguity relating to implementation details at this point of time)
+May 16   - May 25  : Finish Work on UI (Qt Creator)
+May 26   - June 1  : Work on the File transfer Mechanism between Client and server. (Implementation)
+June 2   - June 8  : Work on the File transfer Mechanism between Client and server. (Implementation)
+June 9   - June 15 : Work on the File transfer Mechanism between Client and server. (Testing)
+June 16  - June 22 : Work on the File transfer Mechanism between Client and server. (Bug Fix)
+June 23  - June 29 : Implement Locking Mechanism in server. (As suggested in implementation details above)
+June 30  - July 6  : Implement File Sync initiation from Client.
+July 7   - July 13 : Implement File Sync initiation from Client.
 - - - - - - - - - - - > Midterm
-July 14  - July 20 :
-July 21  - July 27 :
-July 28  - Aug 3   :
-Aug 4    - Aug 10  :
-Aug 11   - Aug 17  :
+July 14  - July 20 : File Sync and Locking Mechanism. (Testing and Bug Fix)
+- - - - - - - - - - - > All Components of Sync Client are ready at this point of time.
+July 21  - July 27 : Test Client on Different OSes.
+July 28  - Aug 7   : Fix Bugs, Polish (Collect Community FeedBack)
+Aug 8    - Aug 11  : Write Documentation 
+Aug 11   - Aug 14  : (Buffer Time)
 - - - - - - - - - - - > Suggested Pencils Down
-Aug 18   - Aug 22  :
+Aug 15   - Aug 22  : (Buffer Time)
 - - - - - - - - - - - > Firm Pencils Down
-Aug 23   - Aug 29  :
-Aug 30   - Sep 5   :
+Aug 23   - Aug 29  : Identify high priority feature requests ( As submitted by the community)
+Aug 30   - Sep 5   : Create a Work Plan of the above, and start implementing.
 
 
-Do you have other obligations from late May to early August (school, work, vacation, etc.)? Please note that we expect the Summer of Code to be a full-time, 40-hr a week occupation. It is important to be clear and upfront about other commitments that you may have during that time.
+Do you have other obligations from late May to early August :
+I have my semester exams starting from May End to July 1st Week during which i would be busy with them. But apart from that I have no other obligations and would be available for my GSoC work.
 
 About Me (let us know who you are!):
+I am Kunal, an Engineering Student Studying Computer Science and Engineering in Bangalore, India. Using and Contributing to Free Software gives me peace of mind and happiness. Music Interests me and I try to play the Bansuri (Bamboo Flute). As a hobby , I volunteer for free software conferences, noticeably: PyCon india 2010 and KDE India Conference 2011.
+
 
  
