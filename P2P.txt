@@ -5,19 +5,17 @@ As a first step , I propose a peer-to-peer application that (at the moment) aims
 [The idea about such a peer to peer software came to me when i was at a conference where we were all connected to the same local network but did not have internet connection due to some technical problems. We were unable to get a collaborative experience like google docs. The same idea is manifested in a use-case which would make sense for the organization i am applying to]
 
 Implementation Details:
+NOTE: The implementation assumes a few things:
+1. The user is running the ownCloud Server instance locally , on his/her laptop or desktop. This assumption is made for the following reasons. Firstly most users are worried about hosting their files online because of many issues like privacy , time & cost  (Most users have a LOT of data they may want to share, buying so much space and UPLOADING so much data to the host would be cumbersome). So serving files from the local machine is much more convenient . Secondly, it would reduce code duplication in the P2P sync Client.
+2. Server contains a versioning mechanism.(git / mercurial)
 
-The P2P client is implemented in 3 Parts:
+The P2P client is implemented in 2 Parts:
 
 1. User Interface: 
-The user interface would be implemented in PyQt / PySide. The UI generates a configuration file which is used by the back-end, thus making it modular.
+I propose an additional menu entry to the default ownCloud page, called Sync. The menu entry allows user to keep track of which files are being shared with whom. Also it may provide status of active syncs. The proposed web-UI would look and behave similar to the design mentioned in the design doc linked below.
 
-2.File versioning sub-system:
-Each client maintains a local filesystem under version control like git / mercurial. The user uses the files under version control as he normally would.
-Every few minutes the client commits all files that have changed since last commit, one at a time. The files are committed one at a time so that a particular file can be reverted back to without changing other files.
-
-3.Transport / File Sharing backend:
-At the heart of this sync client is an XMPP client. The user registers with any publicly available XMPP service.
-The sync recipients provide the sender with their XMPP / Jabber ids. The negotiations before and after the sync happen over XMPP. 
+2.Transport / File Sharing backend:
+At the heart of this sync client is an XMPP client (could be implemented as a daemon or a helper applicaiton). The user registers with any publicly available XMPP service.The sync recipients provide the sender with their XMPP / Jabber ids. The negotiations before and after the sync happen over XMPP. 
 After two clients have negotiate a sync , both initiate a very simple UDP holepunch. The file transfers happen out of band (Sender IP:Port < ---- > Reciever IP:Port). A publicly available STUN server is used by the clients to know their public IP addresses (to deal with clients hidden behind a NAT).
 
 When a sender has to sync with multiple recipients. First the sender pulls in changes from each of the recipients, merges them locally and then initiates the sync.
@@ -27,11 +25,6 @@ For syncing, the clients communicate with each other over XMPP indicating their 
 Libraries of Choice:
 XMPP library of choice: SleekXMPP
 reasons: Its small, portable, very actively developed, pure python, extensible.
-
-
-Version control mechanism: Mercurial
-reasons: very portable, python
-
 
 UDP hole-punching and file transfer are done using standard python socket libraries ( Tools provided by Python-Twisted may also be used).
 
