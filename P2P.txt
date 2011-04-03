@@ -1,18 +1,15 @@
-We have always thought of Cloud based technologies as being centralized. To share your google docs with someone, the recipient has to be a google user and stay online to be benefited.That in my humble opinion,is not very appealing.
-But i believe that the experience of the cloud can be replicated in a decentralized manner.Users can all be using their own favourite service providers, yet share resources and collaborate.Either on the Internet or on their local networks.
-As a first step , I propose a peer-to-peer application that (at the moment) aims to provide the ability to users to share files with others , and also keep them in sync. All in a decentralized manner.
-
-[The idea about such a peer to peer software came to me when i was at a conference where we were all connected to the same local network but did not have internet connection due to some technical problems. We were unable to get a collaborative experience like google docs. The same idea is manifested in a use-case which would make sense for the organization i am applying to]
-
-Implementation Details:
 NOTE: The implementation assumes a few things:
-1. The user is running the ownCloud Server instance locally , on his/her laptop or desktop. This assumption is made for the following reasons. Firstly most users are worried about hosting their files online because of many issues like privacy , time & cost  (Most users have a LOT of data they may want to share, buying so much space and UPLOADING so much data to the host would be cumbersome). So serving files from the local machine is much more convenient . Secondly, it would reduce code duplication in the P2P sync Client.
+1. The user is running the ownCloud Server instance locally , on his/her laptop or desktop. This assumption is made for the following reasons. Firstly most users are worried about hosting their files online because of many issues like privacy , time & cost  (Most users have a LOT of data they may want to share, buying so much space and UPLOADING so much data to the host would be cumbersome) serving files from the local machine is much more convenient . Secondly, it would reduce code duplication in the P2P sync Client.
 2. Server contains a versioning mechanism.(git / mercurial)
 
 The P2P client is implemented in 2 Parts:
 
 1. User Interface: 
 I propose an additional menu entry to the default ownCloud page, called Sync. The menu entry allows user to keep track of which files are being shared with whom. Also it may provide status of active syncs. The proposed web-UI would look and behave similar to the design mentioned in the design doc linked below.
+
+As a first step , i propose that the UI write all the settings configuration to a file which is read by the backend. And the backend write updates etc to a file which would be used by the UI to show updates etc.
+
+After the initial proposal is implemented, the UI could be hooked up to interact with the backend directly.
 
 2.Transport / File Sharing backend:
 At the heart of this sync client is an XMPP client (could be implemented as a daemon or a helper applicaiton). The user registers with any publicly available XMPP service.The sync recipients provide the sender with their XMPP / Jabber ids. The negotiations before and after the sync happen over XMPP. 
@@ -37,7 +34,7 @@ Tentative Timeline (in weekly intervals until 2 weeks after the end of GSoC):
 April 25 - May 2   : Familiarize myself with members of ownCloud team and which part each works on. 
 May 3    - May 9   : Collect Feedback from team-members and refine implementation details.
 May 10   - May 16  : Finalize on a Project Work Plan (There must not be any ambiguity relating to implementation details at this point of time)
-May 16   - May 25  : Finish Work on UI 
+May 16   - May 25  : Finish Work on UI (Qt Creator)
 May 26   - June 1  : Work on the XMPP portion get two clients to exchange messages over internet and locally. (Implementation)
 June 2   - June 8  :  Work on the XMPP portion get two clients to exchange messages over internet and locally.(Implementation)
 June 9   - June 15 : Work on the XMPP portion get two clients to exchange messages over internet and locally.(Implementation)
@@ -57,7 +54,3 @@ Aug 15   - Aug 22  : (Buffer Time)
 - - - - - - - - - - - > Firm Pencils Down
 Aug 23   - Aug 29  : Identify high priority feature requests ( As submitted by the community)
 Aug 30   - Sep 5   : Create a Work Plan of the above, and start implementing.
-
-
-
-
