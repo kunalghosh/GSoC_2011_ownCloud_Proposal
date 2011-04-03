@@ -1,0 +1,70 @@
+We have always thought of Cloud based technologies as being centralized. To share your google docs with someone, the recipient has to be a google user and stay online to be benefited.That in my humble opinion,is not very appealing.
+But i believe that the experience of the cloud can be replicated in a decentralized manner.Users can all be using their own favourite service providers, yet share resources and collaborate.Either on the Internet or on their local networks.
+As a first step , I propose a peer-to-peer application that (at the moment) aims to provide the ability to users to share files with others , and also keep them in sync. All in a decentralized manner.
+
+[The idea about such a peer to peer software came to me when i was at a conference where we were all connected to the same local network but did not have internet connection due to some technical problems. We were unable to get a collaborative experience like google docs. The same idea is manifested in a use-case which would make sense for the organization i am applying to]
+
+Implementation Details:
+
+The P2P client is implemented in 3 Parts:
+
+1. User Interface: 
+The user interface would be implemented in PyQt / PySide. The UI generates a configuration file which is used by the back-end, thus making it modular.
+
+2.File versioning sub-system:
+Each client maintains a local filesystem under version control like git / mercurial. The user uses the files under version control as he normally would.
+Every few minutes the client commits all files that have changed since last commit, one at a time. The files are committed one at a time so that a particular file can be reverted back to without changing other files.
+
+3.Transport / File Sharing backend:
+At the heart of this sync client is an XMPP client. The user registers with any publicly available XMPP service.
+The sync recipients provide the sender with their XMPP / Jabber ids. The negotiations before and after the sync happen over XMPP. 
+After two clients have negotiate a sync , both initiate a very simple UDP holepunch. The file transfers happen out of band (Sender IP:Port < ---- > Reciever IP:Port). A publicly available STUN server is used by the clients to know their public IP addresses (to deal with clients hidden behind a NAT).
+
+When a sender has to sync with multiple recipients. First the sender pulls in changes from each of the recipients, merges them locally and then initiates the sync.
+
+For syncing, the clients communicate with each other over XMPP indicating their current revision numbers. Suppose two clients A and B want to sync. Supposing A has a higher revision number, it creates a (git / mercurial ) bundle from the lower revision (B’s revision number) to its current revision number (A’s revision number) This bundle is then sent to the client with the lower revision number(B) which can pull from it.
+
+Libraries of Choice:
+XMPP library of choice: SleekXMPP
+reasons: Its small, portable, very actively developed, pure python, extensible.
+
+
+Version control mechanism: Mercurial
+reasons: very portable, python
+
+
+UDP hole-punching and file transfer are done using standard python socket libraries ( Tools provided by Python-Twisted may also be used).
+
+PyZeroconf is used for Client auto-discovery in the local network.
+
+(Detailed Design Document: https://github.com/kunalghosh/GSoC_2011_ownCloud_Proposal/blob/master/ownCloud_ProposalPDF.pdf )
+
+Tentative Timeline (in weekly intervals until 2 weeks after the end of GSoC):
+
+April 25 - May 2   : Familiarize myself with members of ownCloud team and which part each works on. 
+May 3    - May 9   : Collect Feedback from team-members and refine implementation details.
+May 10   - May 16  : Finalize on a Project Work Plan (There must not be any ambiguity relating to implementation details at this point of time)
+May 16   - May 25  : Finish Work on UI (Qt Creator)
+May 26   - June 1  : Work on the XMPP portion get two clients to exchange messages over internet and locally. (Implementation)
+June 2   - June 8  :  Work on the XMPP portion get two clients to exchange messages over internet and locally.(Implementation)
+June 9   - June 15 : Work on the XMPP portion get two clients to exchange messages over internet and locally.(Implementation)
+June 16  - June 22 : Work on the XMPP portion get two clients to exchange messages over internet and locally.(Testing and Bug Fix)
+
+June 23  - June 29 : Make client manipulate git / mercurial repos. Automatic commits etc.
+June 30  - July 6  : Version control (Testing and BugFix)
+July 7   - July 13 : Implement and Test the UDP hole punching.
+- - - - - - - - - - - > Midterm
+July 14  - July 20 : Test the Sync negotiations and sync of bundles
+July 21  - July 27 : Test Client on Different OSes.
+July 28  - Aug 7   : Fix Bugs, Polish (Collect Community FeedBack)
+Aug 8    - Aug 11  : Write Documentation 
+Aug 11   - Aug 14  : (Buffer Time)
+- - - - - - - - - - - > Suggested Pencils Down
+Aug 15   - Aug 22  : (Buffer Time)
+- - - - - - - - - - - > Firm Pencils Down
+Aug 23   - Aug 29  : Identify high priority feature requests ( As submitted by the community)
+Aug 30   - Sep 5   : Create a Work Plan of the above, and start implementing.
+
+
+
+
