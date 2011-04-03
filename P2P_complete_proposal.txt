@@ -1,0 +1,90 @@
+Email: kunal.t2@gmail.com
+Short description: In this proposal, i discuss the idea of a peer-to-peer application that would allow the users to enjoy the experience of the Cloud but in a decentralized manner. This application aims to allow people to share files and keep them in sync across the Internet as well as within local networks. ( The architecture chosen can be extended to more use-cases in the future).
+Name: Kunal Ghosh
+
+Email Address: kunal.t2@gmail.com
+
+Freenode IRC Nick: gancient
+
+IM Service and Username: gtalk username: kunal.t2
+
+Location (City, Country and/or Time Zone):
+
+Bangalore, India, UTC +5:30
+
+Proposal Title: OwnCloud Peer-to-Peer Sync Client
+
+Motivation for Proposal / Goal:
+
+We have always thought of Cloud based technologies as being centralized. To share your google docs with someone, the recipient has to be a google user and stay online to be benefited.That in my humble opinion,is not very appealing.
+But i believe that the experience of the cloud can be replicated in a decentralized manner.Users can all be using their own favourite service providers, yet share resources and collaborate.Either on the Internet or on their local networks.
+As a first step , I propose a peer-to-peer application that (at the moment) aims to provide the ability to users to share files with others , and also keep them in sync. All in a decentralized manner.
+
+[The idea about such a peer to peer software came to me when i was at a conference where we were all connected to the same local network but did not have internet connection due to some technical problems. We were unable to get a collaborative experience like google docs. The same idea is manifested in a use-case which would make sense for the organization i am applying to]
+
+Implementation Details:
+NOTE: The implementation assumes a few things:
+1. The user is running the ownCloud Server instance locally , on his/her laptop or desktop. This assumption is made for the following reasons. Firstly most users are worried about hosting their files online because of many issues like privacy , time & cost  (Most users have a LOT of data they may want to share, buying so much space and UPLOADING so much data to the host would be cumbersome) serving files from the local machine is much more convenient . Secondly, it would reduce code duplication in the P2P sync Client.
+2. Server contains a versioning mechanism.(git / mercurial)
+
+The P2P client is implemented in 2 Parts:
+
+1. User Interface: 
+I propose an additional menu entry to the default ownCloud page, called Sync. The menu entry allows user to keep track of which files are being shared with whom. Also it may provide status of active syncs. The proposed web-UI would look and behave similar to the design mentioned in the design doc linked below.
+
+As a first step , i propose that the UI write all the settings configuration to a file which is read by the backend. And the backend write updates etc to a file which would be used by the UI to show updates etc.
+
+After the initial proposal is implemented, the UI could be hooked up to interact with the backend directly.
+
+2.Transport / File Sharing backend:
+At the heart of this sync client is an XMPP client (could be implemented as a daemon or a helper applicaiton). The user registers with any publicly available XMPP service.The sync recipients provide the sender with their XMPP / Jabber ids. The negotiations before and after the sync happen over XMPP. 
+After two clients have negotiate a sync , both initiate a very simple UDP holepunch. The file transfers happen out of band (Sender IP:Port < ---- > Reciever IP:Port). A publicly available STUN server is used by the clients to know their public IP addresses (to deal with clients hidden behind a NAT).
+
+When a sender has to sync with multiple recipients. First the sender pulls in changes from each of the recipients, merges them locally and then initiates the sync.
+
+For syncing, the clients communicate with each other over XMPP indicating their current revision numbers. Suppose two clients A and B want to sync. Supposing A has a higher revision number, it creates a (git / mercurial ) bundle from the lower revision (B’s revision number) to its current revision number (A’s revision number) This bundle is then sent to the client with the lower revision number(B) which can pull from it.
+
+Libraries of Choice:
+XMPP library of choice: SleekXMPP
+reasons: Its small, portable, very actively developed, pure python, extensible.
+
+UDP hole-punching and file transfer are done using standard python socket libraries ( Tools provided by Python-Twisted may also be used).
+
+PyZeroconf is used for Client auto-discovery in the local network.
+
+(Detailed Design Document: https://github.com/kunalghosh/GSoC_2011_ownCloud_Proposal/blob/master/ownCloud_ProposalPDF.pdf )
+
+Tentative Timeline (in weekly intervals until 2 weeks after the end of GSoC):
+
+April 25 - May 2   : Familiarize myself with members of ownCloud team and which part each works on. 
+May 3    - May 9   : Collect Feedback from team-members and refine implementation details.
+May 10   - May 16  : Finalize on a Project Work Plan (There must not be any ambiguity relating to implementation details at this point of time)
+May 16   - May 25  : Finish Work on UI (Qt Creator)
+May 26   - June 1  : Work on the XMPP portion get two clients to exchange messages over internet and locally. (Implementation)
+June 2   - June 8  :  Work on the XMPP portion get two clients to exchange messages over internet and locally.(Implementation)
+June 9   - June 15 : Work on the XMPP portion get two clients to exchange messages over internet and locally.(Implementation)
+June 16  - June 22 : Work on the XMPP portion get two clients to exchange messages over internet and locally.(Testing and Bug Fix)
+
+June 23  - June 29 : Make client manipulate git / mercurial repos. Automatic commits etc.
+June 30  - July 6  : Version control (Testing and BugFix)
+July 7   - July 13 : Implement and Test the UDP hole punching.
+- - - - - - - - - - - > Midterm
+July 14  - July 20 : Test the Sync negotiations and sync of bundles
+July 21  - July 27 : Test Client on Different OSes.
+July 28  - Aug 7   : Fix Bugs, Polish (Collect Community FeedBack)
+Aug 8    - Aug 11  : Write Documentation 
+Aug 11   - Aug 14  : (Buffer Time)
+- - - - - - - - - - - > Suggested Pencils Down
+Aug 15   - Aug 22  : (Buffer Time)
+- - - - - - - - - - - > Firm Pencils Down
+Aug 23   - Aug 29  : Identify high priority feature requests ( As submitted by the community)
+Aug 30   - Sep 5   : Create a Work Plan of the above, and start implementing.
+Do you have other obligations from late May to early August:
+
+I have my semester exams starting from May End to June 1st Week during which i would be busy with them. But apart from that I have no other obligations and would be available for my GSoC work.
+
+About Me (let us know who you are!):
+
+I am Kunal, an Engineering Student Studying Computer Science and Engineering in Bangalore, India. Using and Contributing to Free Software in any way, gives me peace of mind and happiness. Music Interests me and I try to play the Bansuri (Bamboo Flute). As a hobby , I volunteer for free software conferences, noticeably: PyCon india 2010 and KDE India Conference 2011.
+
+
