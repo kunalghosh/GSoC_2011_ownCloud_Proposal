@@ -37,7 +37,7 @@ Tentative Timeline (in weekly intervals until 2 weeks after the end of GSoC):
 April 25 - May 2   : Familiarize myself with members of ownCloud team and which part each works on. 
 May 3    - May 9   : Collect Feedback from team-members and refine implementation details.
 May 10   - May 16  : Finalize on a Project Work Plan (There must not be any ambiguity relating to implementation details at this point of time)
-May 16   - May 25  : Finish Work on UI (Qt Creator)
+May 16   - May 25  : Finish Work on UI 
 May 26   - June 1  : Work on the XMPP portion get two clients to exchange messages over internet and locally. (Implementation)
 June 2   - June 8  :  Work on the XMPP portion get two clients to exchange messages over internet and locally.(Implementation)
 June 9   - June 15 : Work on the XMPP portion get two clients to exchange messages over internet and locally.(Implementation)
